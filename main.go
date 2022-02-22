@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bot/handlers"
 	"os"
 
 	"github.com/PaulSonOfLars/gotgbot/v2"
@@ -19,6 +20,7 @@ func main() {
 		panic(err)
 	}
 	updater := ext.NewUpdater(nil)
+	handlers.Load(updater.Dispatcher)
 	err = updater.StartPolling(
 		bot, &ext.PollingOpts{
 			// DropPendingUpdates: true,
