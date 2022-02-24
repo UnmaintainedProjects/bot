@@ -27,6 +27,7 @@ jobs:
 
   build-windows:
     runs-on: windows-2022
+    needs: build-linux
 
     steps:
       - name: Checkout
