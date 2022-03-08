@@ -14,7 +14,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	token := os.Getenv("TOKEN")
+	token := os.Getenv("BOT_TOKEN")
 	bot, err := gotgbot.NewBot(token, nil)
 	if err != nil {
 		panic(err)
