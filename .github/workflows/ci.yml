@@ -8,7 +8,7 @@ on:
       - v*
 
 jobs:
-  build-linux:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,33 +18,23 @@ jobs:
         with:
           go-version: '^1.17'
 
-      - name: Build
+      - name: Build arm64 Linux
         run: |
-          go build -o bot
+          env GOOS=linux GOARCH=arm64 go build -o bot-linux-arm64
+
+      - name: Build amd64 Linux
+        run: |
+          env GOOS=linux GOARCH=amd64 go build -o bot-linux-amd64
+
+      - name: Build Windows
+        run: |
+          env GOOS=windows go build -o bot.exe
 
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: bot
-
-  build-windows:
-    runs-on: windows-2022
-    needs: build-linux
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/setup-go@v2
-        with:
-          go-version: '^1.17'
-
-      - name: Build
-        run: |
-          go build -o bot.exe
-
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files: bot.exe
+          files: |
+            bot-linux-arm64
+            bot-linux-amd64
+            bot.exe
