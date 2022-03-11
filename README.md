@@ -14,4 +14,4 @@ To get started with the template, you can just reuse its structure. If you’re 
 
 ## License
 
-gotgbot Template is licensed under [WTFPL](./LICENSE).
+gotgbot Template is licensed under [WTFPL](./LICENSE). Although, the projects using it are not forced to use the same license.
